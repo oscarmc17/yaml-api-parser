@@ -12,9 +12,13 @@ def parse(file_path):
 def healthCheck(config):
     
     for data in config:
-        print(json.dumps(data, indent=4))
+        name = data.get('name')
+        print(name)
 
 
 
-parser = parse(url)
-healthCheck(parser)
+
+if __name__ == "__main__":
+
+    parser = parse(url)
+    healthCheck(parser)
