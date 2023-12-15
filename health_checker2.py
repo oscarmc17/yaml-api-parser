@@ -11,13 +11,14 @@ def parse(file_path):
 
 def healthCheck(config):
     
-    while True:
-        for data in config:
-            name = data.get('name')
-            url = data.get('url')
-            method = data.get('method', 'GET')
-            header = data.get('headers', {})
-            body = data.get('body')
+    for data in config:
+        name = data.get('name')
+        url = data.get('url')
+        method = data.get('method', 'GET')
+        header = data.get('headers', {})
+        body = data.get('body')
+    
+        print(f"{name}, {url}, {method}, {header}, {body}\n")
 
 
 
