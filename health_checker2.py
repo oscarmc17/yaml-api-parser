@@ -23,8 +23,10 @@ def healthCheck(config):
         try:
             # response = requests.request(method, url, headers=headers, json=body, timeout=5)
             response = requests.get(url, headers=headers, json=body, timeout=5)
-            status_code = response.status_code
-            print(status_code)
+            response_code = response.status_code
+            latency = response.elapsed.total_seconds() * 1000
+            print(latency)
+
         except e as e:
             print(e)
             
