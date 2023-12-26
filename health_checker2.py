@@ -15,10 +15,20 @@ def healthCheck(config):
         name = data.get('name')
         url = data.get('url')
         method = data.get('method', 'GET')
-        header = data.get('headers', {})
+        headers = data.get('headers', {})
         body = data.get('body')
     
-        print(f"{name}, {url}, {method}, {header}, {body}\n")
+        # print(f"{name}, {url}, {method}, {header}, {body}\n")
+
+        try:
+            # response = requests.request(method, url, headers=headers, json=body, timeout=5)
+            response = requests.get(url, headers=headers, json=body, timeout=5)
+            status_code = response.status_code
+            print(status_code)
+        except e as e:
+            print(e)
+            
+        
 
 
 
