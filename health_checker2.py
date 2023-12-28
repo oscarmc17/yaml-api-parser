@@ -25,7 +25,17 @@ def healthCheck(config):
             response = requests.get(url, headers=headers, json=body, timeout=5)
             response_code = response.status_code
             latency = response.elapsed.total_seconds() * 1000
-            print(latency)
+            # print(latency)
+
+            
+
+            if 200 <= response_code < 300 and latency < 500:
+                result = "UP"
+            else:
+                result = "DOWN"
+
+            print(result)
+
 
         except e as e:
             print(e)
