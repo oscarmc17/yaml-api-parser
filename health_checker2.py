@@ -27,14 +27,19 @@ def healthCheck(config):
             latency = response.elapsed.total_seconds() * 1000
             # print(latency)
 
-            
-
-            if 200 <= response_code < 300 and latency < 500:
-                result = "UP"
+            if response_code <= 299 and latency < 500:
+                result = 'UP'
             else:
-                result = "DOWN"
+                result = 'DOWN'
+            
+            print(f"Endpoint {name} has HTTP response code: {response_code} and response latency: {latency}")
 
-            print(result)
+            # if 200 <= response_code < 300 and latency < 500:
+            #     result = "UP"
+            # else:
+            #     result = "DOWN"
+
+            # print(result)
 
 
         except e as e:
