@@ -11,6 +11,8 @@ def parse(file_path):
 
 def healthCheck(config):
     
+    availability = {}
+
     for data in config:
         name = data.get('name')
         url = data.get('url')
@@ -32,19 +34,21 @@ def healthCheck(config):
             else:
                 result = 'DOWN'
             
-            print(f"Endpoint {name} has HTTP response code: {response_code} and response latency: {latency}")
+            # print(f"Endpoint '{name}' is {result}. Response Code: {response_code}. Latency: {latency} ms.")
 
-            # if 200 <= response_code < 300 and latency < 500:
-            #     result = "UP"
-            # else:
-            #     result = "DOWN"
+            # Update availability dictionary
+            if url not in availability:
+                availability[url] = {'total': 1, 'up': 1 if result == 'UP' else 0}
+            else:
+                availability[url]['total'] += 1
+                availability[url]['up'] += 1 if result == 'UP' else 0
 
-            # print(result)
 
 
         except e as e:
             print(e)
-            
+    
+    print(json.dumps(availability, indent=2))
         
 
 
