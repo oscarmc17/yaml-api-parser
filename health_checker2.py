@@ -23,7 +23,6 @@ def healthCheck(config):
         # print(f"{name}, {url}, {method}, {header}, {body}\n")
 
         try:
-            # response = requests.request(method, url, headers=headers, json=body, timeout=5)
             response = requests.get(url, headers=headers, json=body, timeout=5)
             response_code = response.status_code
             latency = response.elapsed.total_seconds() * 1000
@@ -43,12 +42,13 @@ def healthCheck(config):
                 availability[url]['total'] += 1
                 availability[url]['up'] += 1 if result == 'UP' else 0
 
-
-
         except e as e:
             print(e)
     
-    print(json.dumps(availability, indent=2))
+    
+    for url, stats in availability.items():
+        print(url, stats)
+    # print(json.dumps(availability, indent=2))
         
 
 
