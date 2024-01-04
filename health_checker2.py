@@ -45,9 +45,10 @@ def healthCheck(config):
         except e as e:
             print(e)
     
-    
     for url, stats in availability.items():
-        print(url, stats)
+        availability_percentage = round((stats['up'] / stats['total']) * 100)
+        print(f"{url} has {availability_percentage}% availability percentage")
+
     # print(json.dumps(availability, indent=2))
         
 
