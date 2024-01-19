@@ -17,7 +17,7 @@ def healthCheck(config):
         for data in config:
             name = data.get('name')
             url = data.get('url')
-            method = data.get('method', 'GET')
+            # method = data.get('method', 'GET')
             headers = data.get('headers', {})
             body = data.get('body')
         
@@ -29,7 +29,7 @@ def healthCheck(config):
                 latency = response.elapsed.total_seconds() * 1000
                 # print(latency)
 
-                if response_code <= 299 and latency < 500:
+                if 200 <= response_code < 300 and latency < 500:
                     result = 'UP'
                 else:
                     result = 'DOWN'
@@ -46,11 +46,11 @@ def healthCheck(config):
             except e as e:
                 print(e)
 
-        time.sleep(2)
+        time.sleep(15)
         
         for url, stats in availability.items():
             availability_percentage = round((stats['up'] / stats['total']) * 100)
-            print(f"{url} has {availability_percentage}% availability percentage")
+            print(f"\n{url} has {availability_percentage}% availability percentage")
 
 
     # print(json.dumps(availability, indent=2))
